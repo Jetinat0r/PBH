@@ -9,8 +9,8 @@ public enum ClientToServerId : ushort
     requestDisconnect = 0,
     joinInfo = 1,
     playerPosRot = 2,
-    shoveStart = 3,
-    shoveExecute = 4,
+    pushStart = 3,
+    pushExecute = 4,
 }
 
 public enum ServerToClientId : ushort
@@ -18,8 +18,8 @@ public enum ServerToClientId : ushort
     disconnectWithReason = 0,
     playerSpawnInfo = 1,
     playerPosRot = 2,
-    playerShoveStart = 3,
-    playerShoveExecute = 4,
+    playerPushStart = 3,
+    playerPushExecute = 4,
 }
 
 public class ClientManager : MonoBehaviour
