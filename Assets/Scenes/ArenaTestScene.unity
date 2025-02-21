@@ -382,6 +382,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 933371996508300618, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1665925526986477437, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -429,7 +433,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1496936011885121847, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
