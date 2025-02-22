@@ -116,7 +116,7 @@ public class MainMenuManager : MonoBehaviour
     {
         //Validate preferred name and color input
         string _preferredPlayerName = playerNameInputField.text.Trim();
-        if (_preferredPlayerName.Length <= 0 || _preferredPlayerName.Length >= ClientManager.PLAYER_NAME_MAX_LENGTH)
+        if (_preferredPlayerName.Length <= 0 || _preferredPlayerName.Length > ClientManager.PLAYER_NAME_MAX_LENGTH)
         {
             FlashError("Name must be 1-10 characters long!");
             return;
