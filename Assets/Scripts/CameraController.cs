@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform mainCameraCenter;
     [SerializeField]
+    private Camera mainCamera;
+    [SerializeField]
     private Transform mainMenuPos;
     [SerializeField]
     private Transform settingsMenuPos;
@@ -17,8 +19,13 @@ public class CameraController : MonoBehaviour
     private Transform arenaSurvivorViewPos;
     [SerializeField]
     private Transform arenaConductorViewPos;
+    [SerializeField]
+    private float defaultZoom = 12f;
+    [SerializeField]
+    private float conductorZoom = 16f;
 
     private Tween sceneChangeTween;
+    private Tween cameraZoomTween;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +41,13 @@ public class CameraController : MonoBehaviour
     }
 
     //_time is in seconds
-    public void MoveCamToPos(Transform _targetPos, float _time)
+    public void TweenCamPosZoom(Transform _targetPos, float _targetZoom, float _time)
     {
         sceneChangeTween?.Kill();
+        cameraZoomTween?.Kill();
+
         sceneChangeTween = mainCameraCenter.transform.DOMove(_targetPos.position, _time).SetEase(Ease.InOutQuad);
+        cameraZoomTween = mainCamera.DOOrthoSize(_targetZoom, _time).SetEase(Ease.InOutQuad);
     }
 
     //Magnitude: how far / hard the camera shakes in game units
@@ -55,21 +65,21 @@ public class CameraController : MonoBehaviour
 
     public void MoveToMainMenu(float _time)
     {
-        MoveCamToPos(mainMenuPos, _time);
+        TweenCamPosZoom(mainMenuPos, defaultZoom, _time);
     }
 
     public void MoveToSettingsMenu(float _time)
     {
-        MoveCamToPos(settingsMenuPos, _time);
+        TweenCamPosZoom(settingsMenuPos, defaultZoom, _time);
     }
 
     public void MoveToArenaSurvivorView(float _time)
     {
-        MoveCamToPos(arenaSurvivorViewPos, _time);
+        TweenCamPosZoom(arenaSurvivorViewPos, defaultZoom, _time);
     }
 
     public void MoveToArenaConductorView(float _time)
     {
-        MoveCamToPos(arenaConductorViewPos, _time);
+        TweenCamPosZoom(arenaConductorViewPos, conductorZoom, _time);
     }
 }

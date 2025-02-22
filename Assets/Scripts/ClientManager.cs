@@ -7,19 +7,18 @@ using Riptide.Utils;
 public enum ClientToServerId : ushort
 {
     requestDisconnect = 0,
-    joinInfo = 1,
-    playerPosRot = 2,
-    pushStart = 3,
-    pushExecute = 4,
+    playerPosRot,
+    pushStart,
+    pushExecute,
 }
 
 public enum ServerToClientId : ushort
 {
     disconnectWithReason = 0,
-    playerSpawnInfo = 1,
-    playerPosRot = 2,
-    playerPushStart = 3,
-    playerPushExecute = 4,
+    playerSpawnInfo,
+    playerPosRot,
+    playerPushStart,
+    playerPushExecute,
 }
 
 public class ClientManager : MonoBehaviour
@@ -32,14 +31,12 @@ public class ClientManager : MonoBehaviour
     public static ClientManager instance = null;
 
     public Client client;
-    [SerializeField]
-    public List<Color> playerColors = new List<Color>();
+    /*
     [SerializeField]
     private string serverAddress = "127.0.0.1";
     [SerializeField]
     private ushort port = 7777;
-    private string desiredPlayerName = "Player";
-    private string assignedPlayerName = "Player";
+    */
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void InitializeRiptide()

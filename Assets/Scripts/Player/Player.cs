@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Dictionary<ushort, Player> playerList = new Dictionary<ushort, Player>();
-
     [SerializeField]
     protected GameObject playerPivot;
 
@@ -46,22 +44,25 @@ public class Player : MonoBehaviour
 
     public ushort playerId;
     public string playerUserName = "Player";
+    public int colorId = 0;
 
     private void Start()
     {
         handDefaultOffset = handHolder.transform.localPosition.y;
     }
 
-    public void SetSpawnInfo(ushort _id, string _username)
+    public void SetSpawnInfo(ushort _id, string _username, int _colorId)
     {
         playerId = _id;
         playerUserName = _username;
-        //Above line should actually be handled by server
-        baseGraphics.color = ClientManager.instance.playerColors[_id];
+        colorId = _colorId;
+
+        nameplate.color = GameManager.instance.playerColors[colorId];
+        baseGraphics.color = GameManager.instance.playerColors[colorId];
 
         foreach (SpriteRenderer sr in handGraphics)
         {
-            sr.color = ClientManager.instance.playerColors[_id];
+            sr.color = GameManager.instance.playerColors[colorId];
         }
 
         nameplate.text = playerUserName;
@@ -106,5 +107,25 @@ public class Player : MonoBehaviour
 
         pushAnimationTween?.Kill();
         pushAnimationTween = handHolder.transform.DOLocalMoveZ(handDefaultOffset, pushReturnTime).SetEase(Ease.OutQuad);
+    }
+
+    public void SpawnPlayer(Vector3 _spawnPos, Quaternion _spawnRot)
+    {
+        //TODO: Animation / particle FX for spawning
+        transform.SetPositionAndRotation(_spawnPos, _spawnRot);
+    }
+
+    public void KillPlayer()
+    {
+        //TODO: Animation / particle FX for exploding
+        //TODO: Hide graphics, disable input, and remove from arena; move to GBJ
+    }
+
+    public void DisconnectPlayer()
+    {
+        KillPlayer();
+
+        //TODO: Delay until after kill animation
+        Destroy(gameObject);
     }
 }

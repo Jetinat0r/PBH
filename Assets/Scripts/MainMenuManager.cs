@@ -9,6 +9,8 @@ using System;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public static MainMenuManager instance;
+
     [SerializeField]
     private RectTransform mainMenuPanel;
     [SerializeField]
@@ -33,17 +35,36 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private Button settingsButton;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         loadingWheel.transform.DORotate(new Vector3(0f, 0f, -360f), loadingWheelRotationTime, RotateMode.LocalAxisAdd).SetRelative(true).SetEase(Ease.Linear).SetLoops(-1);
         ClientManager.instance.client.Connected += DidConnect;
         ClientManager.instance.client.ConnectionFailed += OnConnectionFailed;
+        ClientManager.instance.client.Disconnected += DidDisconnect;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     //Called to bring the main menu back into view
     public void ReturnToMainMenu()
     {
+        CameraController.instance.MoveToMainMenu(0.5f);
         mainMenuPanel.gameObject.SetActive(true);
     }
 
@@ -52,6 +73,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SetUiConnectingState(false);
         mainMenuPanel.gameObject.SetActive(false);
+
+        CameraController.instance.MoveToArenaConductorView(0.5f);
+        ExitServerMenuManager.instance.OpenMenu();
     }
 
     //What each UI element should do when attempting to connect to a server
@@ -98,13 +122,13 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        Message _message = Message.Create();
+        Message _joinInfoMessage = Message.Create();
         //Add preferred name
-        _message.AddString(_preferredPlayerName);
+        _joinInfoMessage.AddString(_preferredPlayerName);
         //Add preferred color index
-        _message.AddInt(0);
+        _joinInfoMessage.AddInt(0);
 
-        if (ClientManager.instance.client.Connect(serverAddressInputField.text + ":" + serverPortInputField.text, message: _message))
+        if (ClientManager.instance.client.Connect(serverAddressInputField.text + ":" + serverPortInputField.text, message: _joinInfoMessage))
         {
             SetUiConnectingState(true);
         }
@@ -146,7 +170,40 @@ public class MainMenuManager : MonoBehaviour
     private void DidConnect(object _sender, EventArgs _e)
     {
         LeaveMainMenu();
-        //SendPlayerInfo();
+    }
+
+    private void DidDisconnect(object _sender, DisconnectedEventArgs _e)
+    {
+        ExitServerMenuManager.instance.CloseMenu();
+        ReturnToMainMenu();
+
+        switch (_e.Reason)
+        {
+            case(DisconnectReason.TimedOut):
+                FlashError($"Connection terminated: Timed out");
+                break;
+            case (DisconnectReason.ConnectionRejected):
+                FlashError($"Connection terminated: Connection rejected");
+                break;
+            case (DisconnectReason.PoorConnection):
+                FlashError($"Connection terminated: Poor connection");
+                break;
+            case (DisconnectReason.ServerStopped):
+                FlashError($"Connection terminated: Server stopped");
+                break;
+            case (DisconnectReason.NeverConnected):
+                FlashError($"Connection terminated: Never connected");
+                break;
+            case (DisconnectReason.Kicked):
+                FlashError($"Connection terminated: Kicked");
+                break;
+            case (DisconnectReason.Disconnected):
+                FlashError($"Connection terminated: Disconnected");
+                break;
+            case (DisconnectReason.TransportError):
+                FlashError($"Connection terminated: Transport error");
+                break;
+        }
     }
     #endregion
 }
