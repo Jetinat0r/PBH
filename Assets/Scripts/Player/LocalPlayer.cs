@@ -16,7 +16,7 @@ public class LocalPlayer : Player
     }
 
     #region Messages
-    private void SendPlayerPosRot()
+    public void SendPlayerPosRot()
     {
         Message message = Message.Create(MessageSendMode.Unreliable, ClientToServerId.playerPosRot);
         message.AddVector3(transform.position);
@@ -25,12 +25,12 @@ public class LocalPlayer : Player
         ClientManager.instance.client.Send(message);
     }
 
-    private void SendChargePush()
+    public void SendChargePush()
     {
         ChargePush();
     }
 
-    private void SendExecutePush()
+    public void SendExecutePush()
     {
         ExecutePush();
     }

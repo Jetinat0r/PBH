@@ -8,7 +8,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    protected GameObject playerPivot;
+    public GameObject playerPivot;
+
+    [SerializeField]
+    public Rigidbody2D rb;
+    [SerializeField]
+    public Collider2D physicsCollider;
 
     [SerializeField]
     private GameObject handHolder;

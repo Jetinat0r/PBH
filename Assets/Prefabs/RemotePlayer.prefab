@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6102803502937384315, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8970451381507399342, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
       propertyPath: m_Name
       value: RemotePlayer
@@ -70,6 +74,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2165854951194076039, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
   m_PrefabInstance: {fileID: 1218601074414308450}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &4924919611885381913 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6102803502937384315, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+  m_PrefabInstance: {fileID: 1218601074414308450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &5467408266621926515 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6559903942901723153, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
@@ -83,6 +92,11 @@ GameObject:
 --- !u!212 &6964263215435451685 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8092791816187167047, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+  m_PrefabInstance: {fileID: 1218601074414308450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7525376957848533641 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8684863403730630379, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
   m_PrefabInstance: {fileID: 1218601074414308450}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7823919381657080524 stripped
@@ -103,6 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPivot: {fileID: 1074107011574951909}
+  rb: {fileID: 4924919611885381913}
+  physicsCollider: {fileID: 7525376957848533641}
   handHolder: {fileID: 6179861028538082735}
   handFullBackOffset: -0.25
   handFullForwardOffset: 0.5
@@ -119,6 +135,7 @@ MonoBehaviour:
   - {fileID: 1010458615483522575}
   playerId: 0
   playerUserName: Player
+  colorId: 0
 --- !u!114 &8247527973596009572 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7105639825521661958, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}

@@ -89,6 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1231650222044194567 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8684863403730630379, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+  m_PrefabInstance: {fileID: 7606973505889817068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579659665430007618 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8970451381507399342, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
@@ -107,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPivot: {fileID: 8619836377563886187}
+  rb: {fileID: 4404772679212168343}
+  physicsCollider: {fileID: 1231650222044194567}
   handHolder: {fileID: 3223301890419456033}
   handFullBackOffset: -0.25
   handFullForwardOffset: 0.5
@@ -123,6 +130,7 @@ MonoBehaviour:
   - {fileID: 8610301812066599809}
   playerId: 0
   playerUserName: Player
+  colorId: 0
   movement: {fileID: 6125007658968369505}
   attack: {fileID: -7346853802037820557}
 --- !u!114 &6125007658968369505
@@ -137,6 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e77e136804c884ea1cf1427b52a7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: -223525015922859865}
+  moveSpeed: 400
+  dashSpeedModifier: 3
+  dashDuration: 0.3
+  dashCooldown: 0.5
 --- !u!114 &-7346853802037820557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbe4df88fbc430409958f3ac6e73ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: -223525015922859865}
 --- !u!212 &1863990372327788715 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8092791816187167047, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
@@ -162,6 +176,11 @@ GameObject:
 --- !u!212 &3645685858373837309 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6559903942901723153, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+  m_PrefabInstance: {fileID: 7606973505889817068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &4404772679212168343 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6102803502937384315, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
   m_PrefabInstance: {fileID: 7606973505889817068}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &8610301812066599809 stripped

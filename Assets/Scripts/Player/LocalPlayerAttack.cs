@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LocalPlayerAttack : MonoBehaviour
 {
+    [SerializeField]
+    private LocalPlayer player;
+
     // Start is called before the first frame update
     void Start()
     {

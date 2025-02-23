@@ -169,11 +169,15 @@ public class MainMenuManager : MonoBehaviour
 
     private void DidConnect(object _sender, EventArgs _e)
     {
+        //Switching Action Map led to pain, so we aren't doing that
+        //InputManager.instance.playerInputComponent.SwitchCurrentActionMap("Survivor");
         LeaveMainMenu();
     }
 
     private void DidDisconnect(object _sender, DisconnectedEventArgs _e)
     {
+        //Switching Action Map led to pain, so we aren't doing that
+        //InputManager.instance.playerInputComponent.SwitchCurrentActionMap("UI");
         ExitServerMenuManager.instance.CloseMenu();
         ReturnToMainMenu();
 
