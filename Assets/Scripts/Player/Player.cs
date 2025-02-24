@@ -56,6 +56,13 @@ public class Player : MonoBehaviour
         handDefaultOffset = handHolder.transform.localPosition.y;
     }
 
+    private void OnDestroy()
+    {
+        //Clean up tweens before destroying self
+        //  Saves us from potential errors if not in safe mode, and from warnings in safe mode
+        DOTween.KillAll();
+    }
+
     public void SetSpawnInfo(ushort _id, string _username, int _colorId)
     {
         playerId = _id;
