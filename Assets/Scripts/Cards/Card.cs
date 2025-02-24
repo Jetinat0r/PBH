@@ -1,21 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Card")]
-public class Card : ScriptableObject
+
+public class Card : MonoBehaviour
 {
-    public string cardName;
-    public CardType cardType;
+    public CardData cardData;
+    [SerializeField]
+    public CardDisplay display; //Currently just an image, will likely have more functionality
+    [SerializeField]
+    public EventTrigger cardClickEventTrigger;
 
-    public enum CardType // Defines bullet pattern
+    public void Init(CardData _cardData)
     {
-        Horizontal,
-        Vertical,
-        Cross,
-        X
+        cardData = _cardData;
+        display.SetImage(_cardData.sprite);
     }
 
+    public void SelectCard()
+    {
+        display.SelectCard();
+    }
 
-        
+    public void DeselectCard()
+    {
+        display.DeselectCard();
+    }
 }

@@ -34,6 +34,11 @@ public class MainMenuManager : MonoBehaviour
     private Button playButton;
     [SerializeField]
     private Button settingsButton;
+    [SerializeField]
+    private GameObject DEBUGmainCanvas;
+    [SerializeField]
+    private GameObject DEBUGcardManagerPrefab;
+    private GameObject DEBUGinstantiatedCardManager;
 
     private void Awake()
     {
@@ -64,6 +69,11 @@ public class MainMenuManager : MonoBehaviour
     //Called to bring the main menu back into view
     public void ReturnToMainMenu()
     {
+        if(DEBUGinstantiatedCardManager != null)
+        {
+            Destroy(DEBUGinstantiatedCardManager);
+        }
+
         CameraController.instance.MoveToMainMenu(0.5f);
         mainMenuPanel.gameObject.SetActive(true);
     }
@@ -73,6 +83,8 @@ public class MainMenuManager : MonoBehaviour
     {
         SetUiConnectingState(false);
         mainMenuPanel.gameObject.SetActive(false);
+
+        DEBUGinstantiatedCardManager = Instantiate(DEBUGcardManagerPrefab, DEBUGmainCanvas.transform);
 
         CameraController.instance.MoveToArenaConductorView(0.5f);
         ExitServerMenuManager.instance.OpenMenu();

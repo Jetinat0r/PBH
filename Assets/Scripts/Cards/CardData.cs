@@ -1,8 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Card Type")]
+public enum CardType // Defines bullet pattern
+{
+    Horizontal,
+    Vertical,
+    Cross,
+    X
+}
+
+[CreateAssetMenu(fileName = "NewCardData", menuName = "CardData")]
 public class CardData : ScriptableObject
 {
-    [field: SerializeField] public Sprite Sprite { get; private set; }
-    [field: SerializeField] public string Type { get; private set; }
+    public string cardName;
+    public CardType cardType;
+
+    [SerializeField]
+    public Sprite sprite;
+    [SerializeField]
+    public string type;
 }

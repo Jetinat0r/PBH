@@ -9,7 +9,7 @@ public class CardDisplay : MonoBehaviour
 
     public Image cardImage;
 
-    public void setImage(Sprite newSprite)
+    public void SetImage(Sprite newSprite)
     {
         if (cardImage != null)
         {
@@ -21,4 +21,15 @@ public class CardDisplay : MonoBehaviour
         }
     }
 
+    public void SelectCard()
+    {
+        cardImage.color = Color.yellow;
+        transform.localPosition = new Vector3(0f, 50f, 0f);
+    }
+
+    public void DeselectCard()
+    {
+        cardImage.color = Color.white;
+        transform.localPosition = Vector3.zero;
+    }
 }

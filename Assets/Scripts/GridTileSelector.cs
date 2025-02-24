@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class GridTileSelector : MonoBehaviour
 {
+    public static GridTileSelector instance;
+
     [SerializeField]
     private Tilemap arenaTilemap;
     [SerializeField]
@@ -15,7 +17,33 @@ public class GridTileSelector : MonoBehaviour
     [SerializeField]
     private Color invalidTileColor = Color.red;
 
-    private CardManager cardManager;
+    private bool selectorActive = false;
+
+    public delegate void ClickTile(Vector3Int _tilePos, bool _isValidTile);
+    public ClickTile onTileClick;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void ActivateSelector()
+    {
+        selectorActive = true;
+    }
+
+    public void DeactivateSelector()
+    {
+        selectorActive = false;
+        tileSelectorVisual.gameObject.SetActive(false);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +53,17 @@ public class GridTileSelector : MonoBehaviour
         Debug.Log(arenaTilemap.size);
         Debug.Log(arenaTilemap.origin);
         */
-
-        cardManager = FindObjectOfType<CardManager>();
-        if (cardManager == null)
-        {
-            Debug.LogError("CardManager not found in scene!");
-        }
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        //If we're not trying to select a tile, don't bother!
+        if (!selectorActive)
+        {
+            return;
+        }
+
         Vector3 _mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mouseWorldPos.z = 0;
         Vector3Int _currentCell = arenaTilemap.WorldToCell(_mouseWorldPos);
@@ -51,14 +78,24 @@ public class GridTileSelector : MonoBehaviour
             tileSelectorVisual.transform.position = _weirdPos + arenaTilemap.cellSize / 2f;
             */
 
-            tileSelectorVisual.color = _currentCell.x <= 3 ? invalidTileColor : validTileColor;
+            bool _validTile;
+            if(_currentCell.x <= 0 || _currentCell.x >= 9 || _currentCell.y <= 0 || _currentCell.y >= 9)
+            {
+                _validTile = false;
+                tileSelectorVisual.color = invalidTileColor;
+            }
+            else
+            {
+                _validTile = true;
+                tileSelectorVisual.color = validTileColor;
+            }
 
             tileSelectorVisual.gameObject.SetActive(true);
 
             // Left-Click detector on tile selector
             if (Input.GetMouseButtonDown(0)) 
             {
-                OnTileSelectorClicked();
+                OnTileSelectorClicked(_currentCell, _validTile);
             }
         }
         else
@@ -66,18 +103,16 @@ public class GridTileSelector : MonoBehaviour
             tileSelectorVisual.gameObject.SetActive(false);
         }
     }
-      private void OnTileSelectorClicked()
+      private void OnTileSelectorClicked(Vector3Int _currentTile, bool _onValidTile)
     {
-        Debug.Log("Tile Selector clicked!");
-
-        if (tileSelectorVisual.color == validTileColor && FindObjectOfType<CardManager>().selectedCard != null)
+        if (_onValidTile)
         {
             Debug.Log("Valid tile clicked! Using card.");
-            cardManager.UseCardOnTile();
+            onTileClick?.Invoke(_currentTile, _onValidTile);
         }
         else
         {
-            Debug.LogWarning("Invalid tile or no card selected.");
+            Debug.Log("On invalid tile, can't use card!");
         }
     }
 }
