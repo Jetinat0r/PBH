@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class GridTileSelector : MonoBehaviour
@@ -14,6 +15,8 @@ public class GridTileSelector : MonoBehaviour
     [SerializeField]
     private Color invalidTileColor = Color.red;
 
+    private CardManager cardManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +25,20 @@ public class GridTileSelector : MonoBehaviour
         Debug.Log(arenaTilemap.size);
         Debug.Log(arenaTilemap.origin);
         */
+
+        cardManager = FindObjectOfType<CardManager>();
+        if (cardManager == null)
+        {
+            Debug.LogError("CardManager not found in scene!");
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 _mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _mouseWorldPos.z = 0;
         Vector3Int _currentCell = arenaTilemap.WorldToCell(_mouseWorldPos);
 
         if(arenaTilemap.GetTile(_currentCell) != null)
@@ -43,10 +54,33 @@ public class GridTileSelector : MonoBehaviour
             tileSelectorVisual.color = _currentCell.x <= 3 ? invalidTileColor : validTileColor;
 
             tileSelectorVisual.gameObject.SetActive(true);
+
+            // Left-Click detector on tile selector
+            if (Input.GetMouseButtonDown(0)) 
+            {
+                OnTileSelectorClicked();
+            }
         }
         else
         {
             tileSelectorVisual.gameObject.SetActive(false);
         }
     }
+      private void OnTileSelectorClicked()
+    {
+        Debug.Log("Tile Selector clicked!");
+
+        if (tileSelectorVisual.color == validTileColor && FindObjectOfType<CardManager>().selectedCard != null)
+        {
+            Debug.Log("Valid tile clicked! Using card.");
+            cardManager.UseCardOnTile();
+        }
+        else
+        {
+            Debug.LogWarning("Invalid tile or no card selected.");
+        }
+    }
 }
+
+
+
