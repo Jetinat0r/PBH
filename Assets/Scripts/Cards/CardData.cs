@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public enum CardType // Defines bullet pattern
+public enum CardType : int // Defines bullet pattern
 {
-    Horizontal,
+    Horizontal = 0,
     Vertical,
     Cross,
     X

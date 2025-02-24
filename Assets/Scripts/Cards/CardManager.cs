@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
+using Riptide;
 
 public class CardManager : MonoBehaviour
 {
@@ -248,7 +248,13 @@ public class CardManager : MonoBehaviour
                 break;
             }
         }
-        //callBulletSpawn(cardType) ** not implemented, but psuedocode for future implementation of remote call
+        
+        BulletManager.instance.PlaceBulletPattern(_tilePos, (int)selectedCard.cardData.cardType);
+        Message _placeBulletPatternMessage = Message.Create(MessageSendMode.Reliable, ClientToServerId.placeBulletPattern);
+        _placeBulletPatternMessage.AddVector3Int(_tilePos);
+        _placeBulletPatternMessage.AddInt((int)selectedCard.cardData.cardType);
+        ClientManager.instance.client.Send(_placeBulletPatternMessage);
+
         Destroy(selectedCard.gameObject);
         selectedCard = null; //Remove reference to held card
 

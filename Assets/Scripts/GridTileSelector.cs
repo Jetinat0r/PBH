@@ -45,6 +45,19 @@ public class GridTileSelector : MonoBehaviour
         tileSelectorVisual.gameObject.SetActive(false);
     }
 
+    public bool TryGetWorldPosFromTilePos(Vector3Int _tilePos, out Vector3 _worldPos)
+    {
+        //Needs assigned for the false case, so we do it here anyways
+        _worldPos = Vector3Int.zero;
+        if(_tilePos.x < 0 || _tilePos.x >= arenaTilemap.size.x || _tilePos.y < 0 || _tilePos.y >= arenaTilemap.size.y)
+        {
+            return false;
+        }
+
+        _worldPos = arenaTilemap.CellToWorld(_tilePos) + arenaTilemap.cellSize / 2f;
+        return true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,7 +116,8 @@ public class GridTileSelector : MonoBehaviour
             tileSelectorVisual.gameObject.SetActive(false);
         }
     }
-      private void OnTileSelectorClicked(Vector3Int _currentTile, bool _onValidTile)
+
+    private void OnTileSelectorClicked(Vector3Int _currentTile, bool _onValidTile)
     {
         if (_onValidTile)
         {

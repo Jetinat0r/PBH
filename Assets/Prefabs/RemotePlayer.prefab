@@ -126,9 +126,9 @@ MonoBehaviour:
   handFullBackOffset: -0.25
   handFullForwardOffset: 0.5
   pushChargeTime: 0.15
-  pushActiveTime: 0.4
-  pushBoxActiveStart: 0.1
-  pushBoxActiveEnd: 0.4
+  pushActiveTime: 0.2
+  pushBoxActiveStart: 0.05
+  pushBoxActiveEnd: 0.2
   pushReturnTime: 0.2
   pushForceBox: {fileID: 7843115786211601036}
   nameplate: {fileID: 8247527973596009572}
