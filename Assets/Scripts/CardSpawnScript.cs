@@ -226,6 +226,7 @@ public class CardManager : MonoBehaviour
         {
             if (cards[i] == selectedCard)
             {
+                //callBulletSpawn(cardType) ** not implemented, but psuedocode for future implementation of remote call
                 Destroy(selectedCard);
                 cards[i] = null; // Free up slot
                 break;
