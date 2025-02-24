@@ -143,7 +143,8 @@ public class GameManager : MonoBehaviour
 
         if (playerList.TryGetValue(_fromClientId, out Player _player))
         {
-            _player.transform.position = _pos;
+            _player.rb.MovePosition(_pos);
+            _player.rb.velocity = Vector2.zero;
             _player.playerPivot.transform.rotation = _rot;
         }
         else
