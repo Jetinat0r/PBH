@@ -37,6 +37,6 @@ public class ExitServerMenuManager : MonoBehaviour
         ClientManager.instance.client.Disconnect();
         CloseMenu();
 
-        MainMenuManager.instance.ReturnToMainMenu();
+        //MainMenuManager.instance.ReturnToMainMenu();
     }
 }

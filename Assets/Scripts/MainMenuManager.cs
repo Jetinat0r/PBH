@@ -115,10 +115,12 @@ public class MainMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.P))
         {
             FlashError(serverAddressInputField.text);
         }
+        */
     }
 
     #region ButtonEvents

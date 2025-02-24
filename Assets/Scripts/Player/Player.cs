@@ -60,7 +60,9 @@ public class Player : MonoBehaviour
     {
         //Clean up tweens before destroying self
         //  Saves us from potential errors if not in safe mode, and from warnings in safe mode
-        DOTween.KillAll();
+        this.SafeStopCoroutine(pushAnimationCoroutine);
+        this.SafeStopCoroutine(pushForceBoxCoroutine);
+        DOTween.Kill(gameObject);
     }
 
     public void SetSpawnInfo(ushort _id, string _username, int _colorId)
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
         this.SafeStopCoroutine(pushAnimationCoroutine);
 
         pushAnimationTween?.Kill();
-        pushAnimationTween = handHolder.transform.DOLocalMoveY(handFullForwardOffset, pushActiveTime).SetEase(Ease.OutCubic);
+        pushAnimationTween = handHolder.transform.DOLocalMoveY(handFullForwardOffset, pushActiveTime).SetEase(Ease.Unset);
 
         //pushAnimationCoroutine = this.StartCallAfterSeconds(EndPush, pushActiveTime);
         pushForceBoxCoroutine = this.StartCallAfterSeconds(() =>
@@ -131,6 +133,9 @@ public class Player : MonoBehaviour
     {
         //TODO: Animation / particle FX for exploding
         //TODO: Hide graphics, disable input, and remove from arena; move to GBJ
+        this.SafeStopCoroutine(pushAnimationCoroutine);
+        this.SafeStopCoroutine(pushForceBoxCoroutine);
+        DOTween.Kill(gameObject);
     }
 
     public void DisconnectPlayer()
