@@ -617,6 +617,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2dcd4794-6089-4917-b132-e28e04201aaa",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "979515a0-672c-45fe-866a-ea5b144e16d4",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
