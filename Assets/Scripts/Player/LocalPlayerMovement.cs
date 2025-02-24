@@ -41,7 +41,11 @@ public class LocalPlayerMovement : MonoBehaviour
         playerDashAction.started += OnDash;
     }
 
-    
+    private void OnDestroy()
+    {
+        playerDashAction.started -= OnDash;
+    }
+
 
     private void Update()
     {
@@ -86,11 +90,6 @@ public class LocalPlayerMovement : MonoBehaviour
                 canDash = true;
             }, dashCooldown);
         }
-    }
-
-    private void OnDestroy()
-    {
-        playerDashAction.started -= OnDash;
     }
 
     private void FixedUpdate()

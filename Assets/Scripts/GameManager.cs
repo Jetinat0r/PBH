@@ -151,5 +151,68 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning($"Received PosRot for player {_fromClientId} that does not exist!");
         }
     }
+
+    [MessageHandler((ushort)ServerToClientId.playerPushStart)]
+    public static void PlayerChargePush(Message _message)
+    {
+        ushort _fromClientId = _message.GetUShort();
+
+        if (_fromClientId == ClientManager.instance.client.Id)
+        {
+            Debug.LogWarning($"Received own Charge Push!");
+            return;
+        }
+
+        if (playerList.TryGetValue(_fromClientId, out Player _player))
+        {
+            _player.ChargePush();
+        }
+        else
+        {
+            Debug.LogWarning($"Received Charge Push for player {_fromClientId} that does not exist!");
+        }
+    }
+
+    [MessageHandler((ushort)ServerToClientId.playerPushExecute)]
+    public static void PlayerExecutePush(Message _message)
+    {
+        ushort _fromClientId = _message.GetUShort();
+
+        if (_fromClientId == ClientManager.instance.client.Id)
+        {
+            Debug.LogWarning($"Received own Execute Push!");
+            return;
+        }
+
+        if (playerList.TryGetValue(_fromClientId, out Player _player))
+        {
+            _player.ExecutePush();
+        }
+        else
+        {
+            Debug.LogWarning($"Received Execute Push for player {_fromClientId} that does not exist!");
+        }
+    }
+
+    [MessageHandler((ushort)ServerToClientId.playerPushReturn)]
+    public static void PlayerReturnPush(Message _message)
+    {
+        ushort _fromClientId = _message.GetUShort();
+
+        if (_fromClientId == ClientManager.instance.client.Id)
+        {
+            Debug.LogWarning($"Received own Return Push!");
+            return;
+        }
+
+        if (playerList.TryGetValue(_fromClientId, out Player _player))
+        {
+            _player.EndPush();
+        }
+        else
+        {
+            Debug.LogWarning($"Received Return Push for player {_fromClientId} that does not exist!");
+        }
+    }
     #endregion
 }

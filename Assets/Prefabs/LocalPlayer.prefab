@@ -77,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8970451381507399342, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7346853802037820557}
+    - targetCorrespondingSourceObject: {fileID: 8970451381507399342, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7982279508897503002}
   m_SourcePrefab: {fileID: 100100000, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
 --- !u!114 &796340948111493610 stripped
 MonoBehaviour:
@@ -92,6 +95,11 @@ MonoBehaviour:
 --- !u!58 &1231650222044194567 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 8684863403730630379, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
+  m_PrefabInstance: {fileID: 7606973505889817068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1558361340167829250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8948950943743436526, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}
   m_PrefabInstance: {fileID: 7606973505889817068}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579659665430007618 stripped
@@ -122,7 +130,7 @@ MonoBehaviour:
   pushBoxActiveStart: 0.1
   pushBoxActiveEnd: 0.4
   pushReturnTime: 0.2
-  pushForceBox: {fileID: 0}
+  pushForceBox: {fileID: 1558361340167829250}
   nameplate: {fileID: 796340948111493610}
   baseGraphics: {fileID: 3645685858373837309}
   handGraphics:
@@ -163,6 +171,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: -223525015922859865}
+--- !u!114 &7982279508897503002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579659665430007618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b5b5b23803dde4c935583f2deeecc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4404772679212168343}
+  forceDecayMultiplier: 0.75
+  forceMagnitudeCutoff: 0.2
 --- !u!212 &1863990372327788715 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8092791816187167047, guid: 5612ee95ed83639438599e1660cab8ea, type: 3}

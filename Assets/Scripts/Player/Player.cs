@@ -28,15 +28,15 @@ public class Player : MonoBehaviour
     private float handFullForwardOffset = 0.5f;
 
     [SerializeField]
-    private float pushChargeTime = 0.15f; //How long to pull the arms back for the push
+    public float pushChargeTime = 0.15f; //How long to pull the arms back for the push
     [SerializeField]
-    private float pushActiveTime = 0.4f; //How long the actual "push" lasts
+    public float pushActiveTime = 0.4f; //How long the actual "push" lasts
     [SerializeField]
-    private float pushBoxActiveStart = 0.1f; //When during pushActiveTime to enable the push box
+    public float pushBoxActiveStart = 0.1f; //When during pushActiveTime to enable the push box
     [SerializeField]
-    private float pushBoxActiveEnd = 0.4f; //When during the pushActiveTime to disable the push box
+    public float pushBoxActiveEnd = 0.4f; //When during the pushActiveTime to disable the push box
     [SerializeField]
-    private float pushReturnTime = 0.2f; //How long from max extension to return to rest so next push can start
+    public float pushReturnTime = 0.2f; //How long from max extension to return to rest so next push can start
     [SerializeField]
     private GameObject pushForceBox;
 
@@ -96,9 +96,9 @@ public class Player : MonoBehaviour
         this.SafeStopCoroutine(pushAnimationCoroutine);
 
         pushAnimationTween?.Kill();
-        pushAnimationTween = handHolder.transform.DOLocalMoveZ(handFullForwardOffset, pushActiveTime).SetEase(Ease.OutCubic);
+        pushAnimationTween = handHolder.transform.DOLocalMoveY(handFullForwardOffset, pushActiveTime).SetEase(Ease.OutCubic);
 
-        pushAnimationCoroutine = this.StartCallAfterSeconds(EndPush, pushActiveTime);
+        //pushAnimationCoroutine = this.StartCallAfterSeconds(EndPush, pushActiveTime);
         pushForceBoxCoroutine = this.StartCallAfterSeconds(() =>
         {
             pushForceBox.SetActive(true);
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
         this.SafeStopCoroutine(pushAnimationCoroutine);
 
         pushAnimationTween?.Kill();
-        pushAnimationTween = handHolder.transform.DOLocalMoveZ(handDefaultOffset, pushReturnTime).SetEase(Ease.OutQuad);
+        pushAnimationTween = handHolder.transform.DOLocalMoveY(handDefaultOffset, pushReturnTime).SetEase(Ease.OutQuad);
     }
 
     public void SpawnPlayer(Vector3 _spawnPos, Quaternion _spawnRot)
