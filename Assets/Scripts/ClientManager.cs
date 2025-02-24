@@ -11,6 +11,7 @@ public enum ClientToServerId : ushort
     pushStart,
     pushExecute,
     playerPushReturn,
+    placeBulletPattern,
 }
 
 public enum ServerToClientId : ushort
@@ -21,6 +22,7 @@ public enum ServerToClientId : ushort
     playerPushStart,
     playerPushExecute,
     playerPushReturn,
+    spawnBulletPattern,
 }
 
 public class ClientManager : MonoBehaviour
