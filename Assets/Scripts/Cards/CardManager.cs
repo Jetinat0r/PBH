@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using BHP;
 using Unity.VisualScripting;
 
 public class CardManager : MonoBehaviour

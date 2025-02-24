@@ -1,4 +1,3 @@
-using BHP;
 using UnityEngine;
 
 public class CardComponent : MonoBehaviour
